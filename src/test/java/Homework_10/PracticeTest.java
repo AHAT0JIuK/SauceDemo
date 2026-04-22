@@ -51,7 +51,7 @@ By.xpath("//tag[contains(text(),'text')]");
 - Подсказка: https://www.w3schools.com/cssref/css_selectors.asp
 */
 
-public class Practice {
+public class PracticeTest {
 
     @Test
     public void checkLocator() {

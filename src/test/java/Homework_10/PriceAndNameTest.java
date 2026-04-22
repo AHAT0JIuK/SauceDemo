@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 
@@ -28,6 +28,7 @@ public class PriceAndNameTest {
         options.addArguments("--headless");
         // объявляю тестовый браузер
         WebDriver driver = new ChromeDriver(options);
+        SoftAssert softAssert = new SoftAssert();
         // неявное ожидание
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         // открытие страницы по указанному урлу
@@ -43,11 +44,12 @@ public class PriceAndNameTest {
         // проверка стоимости товара в корзине
         String priceInsideClass = driver.findElement(By.className("inventory_item_price")).getText();
         String price = priceInsideClass.trim(); // убираю из полученного текста разделитель в виде переноса на новую строку
-        Assert.assertEquals(price, "$15.99");
+        softAssert.assertEquals(price, "$15.99");
         // проверка наименования товара в корзине
         String nameInsideClass = driver.findElement(By.className("inventory_item_name")).getText();
-        Assert.assertEquals(nameInsideClass, "Test.allTheThings() T-Shirt (Red)");
+        softAssert.assertEquals(nameInsideClass, "Test.allTheThings() T-Shirt (Red)");
         // закрываю браузер
         driver.quit();
+        softAssert.assertAll();
     }
 }
