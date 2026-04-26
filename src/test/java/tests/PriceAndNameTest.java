@@ -1,8 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
-
-import static org.testng.AssertJUnit.assertEquals;
+import org.testng.asserts.SoftAssert;
 
 /*
 Создать отдельный Java-класс с тестом, сценарий:
@@ -16,21 +15,22 @@ public class PriceAndNameTest extends BaseTest {
 
     @Test
     public void checkBasket() {
+        SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
         loginPage.open();
         // залогин c валидным логином и паролем
         loginPage.login("standard_user", "secret_sauce");
         // проверка открытия страницы с продуктами
-        assertEquals(productsPage.getTitle(), "Products");
+        softAssert.assertEquals(productsPage.getTitle(), "Products");
         // добавление товара в тележку
         productsPage.addItemToCart();
         // переход в тележку
         productsPage.goToCartPage();
         // проверка открытия страницы тележки
-        assertEquals(cartPage.getTitleCartPage(), "Your Cart");
+        softAssert.assertEquals(cartPage.getTitleCartPage(), "Your Cart");
         // проверка стоимости товара в тележке
-        assertEquals(cartPage.getItemPrice(), "$29.99");
+        softAssert.assertEquals(cartPage.getItemPrice(), "$29.99");
         // проверка наименования товара в тележке
-        assertEquals(cartPage.getItemName(), "Sauce Labs Backpack");
+        softAssert.assertEquals(cartPage.getItemName(), "Sauce Labs Backpack");
     }
 }
