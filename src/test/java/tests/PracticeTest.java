@@ -1,12 +1,7 @@
-package Homework_10;
+package tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 /*
 1. Создать новый проект SauceDemo
@@ -51,21 +46,12 @@ By.xpath("//tag[contains(text(),'text')]");
 - Подсказка: https://www.w3schools.com/cssref/css_selectors.asp
 */
 
-public class PracticeTest {
+public class PracticeTest extends BaseTest {
 
     @Test
     public void checkLocator() {
-        // объявляю настройки для тестового браузера
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--incognito");
-        options.addArguments("--headless");
-        // объявляю тестовый браузер
-        WebDriver driver = new ChromeDriver(options);
-        // неявное ожидание
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        // открытие страницы по указанному урлу
-        driver.get("https://www.saucedemo.com/");
+        // открытие страницы залогина
+        loginPage.open();
         // поиск элемента по id
         driver.findElement(By.id("root"));
         // поиск элемента по name
@@ -75,9 +61,8 @@ public class PracticeTest {
         // поиск элемента по tagname
         driver.findElement(By.tagName("noscript"));
         // поиск элемента по linktext
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
+        // залогин c валидным логином и паролем
+        loginPage.login("standard_user", "secret_sauce");
         driver.findElement(By.linkText("Sauce Labs Backpack"));
         // поиск элемента по partiallinktext
         driver.findElement(By.partialLinkText("Bike Light"));
@@ -106,8 +91,8 @@ public class PracticeTest {
         // .class
         driver.findElement(By.cssSelector(".bm-cross"));
         // .class1.class2
-        driver.findElement(By.cssSelector("#react-burger-menu-btn")).click();
-        driver.findElement(By.cssSelector("#logout_sidebar_link")).click();
+        productsPage.openSidebar();
+        productsPage.clickLogoutButton();
         driver.findElement(By.cssSelector(".submit-button.btn_action"));
         // .class1 .class2
         driver.findElement(By.cssSelector(".login_container .login_logo"));
