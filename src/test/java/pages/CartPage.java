@@ -41,5 +41,4 @@ public class CartPage extends BasePage {
         String nameInsideClass = driver.findElement(By.className("inventory_item_name")).getText();
         return nameInsideClass;
     }
-
 }
