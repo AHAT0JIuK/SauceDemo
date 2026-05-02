@@ -2,10 +2,13 @@ package tests;
 
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import tests.base.BaseTest;
 
 public class ProductsPageTest extends BaseTest {
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка открытия сайдбара на странице с продуктами",
+            testName = "Проверка открытия сайдбара на странице с продуктами")
     public void checkOpenSidebar() {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
@@ -20,7 +23,9 @@ public class ProductsPageTest extends BaseTest {
         softAssert.assertEquals(productsPage.getTitleLogoutButton(), "Logout");
     }
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка закрытия сайдбара на странице с продуктами",
+            testName = "Проверка закрытия сайдбара на странице с продуктами")
     public void checkCloseSidebar() {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
@@ -39,7 +44,9 @@ public class ProductsPageTest extends BaseTest {
         softAssert.assertEquals(productsPage.getTitle(), "Products");
     }
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка кнопки добавления продукта в тележку на странице с продуктами",
+            testName = "Проверка кнопки добавления продукта в тележку на странице с продуктами")
     public void checkChangeAddToCartButton() {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина

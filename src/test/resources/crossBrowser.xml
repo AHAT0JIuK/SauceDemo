@@ -1,0 +1,34 @@
+<?xml version ="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2"
+       name="CrossBrowserTest"
+       parallel="tests">
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.AnnotationTransformer"/>
+    </listeners>
+    <test name="Google Chrome">
+        <classes>
+            <class name="tests.CartPageTest"/>
+            <class name="tests.CheckoutOverviewPageTest"/>
+            <class name="tests.CheckoutPageTest"/>
+            <class name="tests.FinishPageTest"/>
+            <class name="tests.ItemPageTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProductsPageTest"/>
+            <parameter name="browser" value="chrome"/>
+        </classes>
+    </test>
+    <test name="Microsoft Edge">
+        <classes>
+            <class name="tests.CartPageTest"/>
+            <class name="tests.CheckoutOverviewPageTest"/>
+            <class name="tests.CheckoutPageTest"/>
+            <class name="tests.FinishPageTest"/>
+            <class name="tests.ItemPageTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProductsPageTest"/>
+            <parameter name="browser" value="edge"/>
+        </classes>
+    </test>
+</suite>
