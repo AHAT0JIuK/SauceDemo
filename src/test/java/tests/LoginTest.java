@@ -1,12 +1,16 @@
 package tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
 
 import static org.testng.AssertJUnit.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка залогина с валидными кредами",
+            testName = "Проверка залогина с валидными кредами")
     public void checkLoginWithPositiveCred() {
         // открытие страницы
         loginPage.open();
@@ -16,37 +20,25 @@ public class LoginTest extends BaseTest {
         assertEquals(productsPage.getTitle(), "Products");
     }
 
-    @Test
-    public void checkLoginWithEmptyPassword() {
-        // открытие страницы
-        loginPage.open();
-        // залогин c валидным логином и пустым паролем
-        loginPage.login("standard_user", "");
-        // проверка появления информационного сообщения об обязательности ввода пароля
-        assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
+    @DataProvider(name = "Тестовые данные для негативного залогина")
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
+        };
     }
 
-    @Test
-    public void checkLoginWithEmptyUser() {
-        // открытие страницы
-        loginPage.open();
-        // залогин c пустым логином и валидным паролем
-        loginPage.login("", "secret_sauce");
-        // проверка появления информационного сообщения об обязательности ввода логина
-        assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username is required");
-    }
-
-    @Test
-    public void checkLoginNegativeCred() {
+    @Test(enabled = true,
+            description = "Проверка залогина с невалидными кредами",
+            testName = "Проверка залогина с невалидными кредами",
+            dataProvider = "Тестовые данные для негативного залогина")
+    public void checkLoginNegativeCred2(String user, String password, String errorMessage) {
         // открытие страницы
         loginPage.open();
         // залогин c невалидным логином и паролем
-        loginPage.login("test", "test");
-        /*
-        проверка появления информационного сообщения о том,
-        что в БД нет зарегистрированного пользователя с введенными данными
-         */
-        assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any " +
-                "user in this service");
+        loginPage.login(user, password);
+        // проверка появления информационного сообщения
+        assertEquals(loginPage.getErrorMessage(), errorMessage);
     }
 }

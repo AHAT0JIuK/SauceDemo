@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
 
 /*
 1. Создать новый проект SauceDemo
@@ -48,7 +49,9 @@ By.xpath("//tag[contains(text(),'text')]");
 
 public class PracticeTest extends BaseTest {
 
-    @Test
+    @Test(enabled = false,
+            description = "Практика нахождения вэб-элементов по разным локаторам",
+            testName = "Практика нахождения вэб-элементов по разным локаторам")
     public void checkLocator() {
         // открытие страницы залогина
         loginPage.open();

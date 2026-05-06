@@ -2,10 +2,13 @@ package tests;
 
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import tests.base.BaseTest;
 
 public class FinishPageTest extends BaseTest {
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка открытия последней страницы оформления заказа",
+            testName = "Проверка открытия последней страницы оформления заказа")
     public void checkOpenFinishPage() {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
@@ -34,7 +37,9 @@ public class FinishPageTest extends BaseTest {
         softAssert.assertEquals(finishPage.getTitleFinishPage(), "Checkout: Complete!");
     }
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка перехода с последней страницы на страницу с продуктами",
+            testName = "Проверка перехода с последней страницы на страницу с продуктами")
     public void checkReturnToProductsPage() {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
@@ -67,7 +72,9 @@ public class FinishPageTest extends BaseTest {
         softAssert.assertEquals(productsPage.getTitle(), "Products");
     }
 
-    @Test
+    @Test(enabled = true,
+            description = "Проверка перехода с последней страницы на страницу тележки",
+            testName = "Проверка перехода с последней страницы на страницу тележки")
     public void checkGoToCartPage() {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
