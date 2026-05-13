@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -20,7 +21,13 @@ public class CheckoutPageTest extends BaseTest {
             description = "Проверка заполнения формы Checkout: Your Information неполными данными",
             testName = "Проверка заполнения формы Checkout: Your Information неполными данными",
             dataProvider = "Тестовые данные заполнения формы Checkout: Your Information")
-    public void checkLoginNegativeCred2(String firstName, String lastName, String zipCode, String errorMessage) {
+    @Description("Проверка заполнения формы Checkout: Your Information неполными данными")
+    @Feature("Checkout: Your Information - Form")
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("QATASK-015")
+    @Issue("SCDM-007")
+    @Owner("Светлов А.А.")
+    public void checkLoginNegativeCred(String firstName, String lastName, String zipCode, String errorMessage) {
         SoftAssert softAssert = new SoftAssert();
         // открытие страницы залогина
         loginPage.open();
@@ -42,5 +49,6 @@ public class CheckoutPageTest extends BaseTest {
         checkoutPage.continueButtonClick();
         // проверка появления информационного сообщения об обязательности заполнения поля First Name
         softAssert.assertEquals(checkoutPage.getErrorMessage(), errorMessage);
+        softAssert.assertAll();
     }
 }

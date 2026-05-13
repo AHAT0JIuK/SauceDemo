@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,6 +21,7 @@ public class CheckoutPage extends BasePage {
         driver.get(BASE_URL + "/checkout-step-one.html");
     }
 
+    @Step("Переход на последнюю страницу оформления заказа")
     public void continueButtonClick() {
         driver.findElement(CONTINUE_BUTTON).click();
     }
@@ -32,6 +34,7 @@ public class CheckoutPage extends BasePage {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
+    @Step("Оформление заказа с именем - '{firstName}', фамилией - '{lastName}' и почтовым индексом - '{zipCode}'")
     public void inputsFill(String firstName, String lastName, String zipCode) {
         driver.findElement(INPUT_FIRST_NAME).sendKeys(firstName);
         driver.findElement(INPUT_LAST_NAME).sendKeys(lastName);

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -21,10 +22,12 @@ public class FinishPage extends BasePage {
         return driver.findElement(PAGE_TITLE).getText();
     }
 
+    @Step("Переход на страницу с продуктами")
     public void backHomeButtonClick() {
         driver.findElement(BACK_HOME_BUTTON).click();
     }
 
+    @Step("Переход на страницу тележки")
     public void goToCartPage() {
         driver.findElement(CART_BUTTON).click();
     }

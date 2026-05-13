@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
@@ -11,6 +12,12 @@ public class LoginTest extends BaseTest {
     @Test(enabled = true,
             description = "Проверка залогина с валидными кредами",
             testName = "Проверка залогина с валидными кредами")
+    @Description("Проверка залогина с валидными кредами")
+    @Feature("Логин на SauceDemo")
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("QATASK-001")
+    @Issue("SCDM-001")
+    @Owner("Светлов А.А.")
     public void checkLoginWithPositiveCred() {
         // открытие страницы
         loginPage.open();
@@ -33,7 +40,13 @@ public class LoginTest extends BaseTest {
             description = "Проверка залогина с невалидными кредами",
             testName = "Проверка залогина с невалидными кредами",
             dataProvider = "Тестовые данные для негативного залогина")
-    public void checkLoginNegativeCred2(String user, String password, String errorMessage) {
+    @Description("Проверка залогина с невалидными кредами")
+    @Feature("Логин на SauceDemo")
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("QATASK-002")
+    @Issue("SCDM-001")
+    @Owner("Светлов А.А.")
+    public void checkLoginNegativeCred(String user, String password, String errorMessage) {
         // открытие страницы
         loginPage.open();
         // залогин c невалидным логином и паролем

@@ -1,17 +1,20 @@
 package tests.base;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.*;
 import utils.TestListener;
 
 import java.time.Duration;
 
-@Listeners(TestListener.class)
+@Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
 
     protected WebDriver driver;
@@ -24,8 +27,9 @@ public class BaseTest {
     protected FinishPage finishPage;
 
     @Parameters({"browser"})
-    @BeforeMethod(alwaysRun = true)
-    public void setUp(@Optional("chrome") String browser) {
+    @BeforeMethod(alwaysRun = true, description = "Настройка браузера")
+    @Description("Настройка браузера")
+    public void setUp(@Optional("chrome") String browser, ITestContext iTestContext) {
         if (browser.equalsIgnoreCase("chrome")) {
             // объявляю настройки для тестового браузера
             ChromeOptions options = new ChromeOptions();
@@ -55,9 +59,12 @@ public class BaseTest {
         checkoutPage = new CheckoutPage(driver);
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
         finishPage = new FinishPage(driver);
+
+        iTestContext.setAttribute("driver", driver);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
+    @Description("Закрытие браузера")
     public void tearDawn() {
         driver.quit();
     }
